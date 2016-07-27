@@ -1,7 +1,6 @@
-//import $ from 'jquery';
-var $ = require('jquery');
+import $ from 'jquery';
 import {name} from './component'
-console.log(name);
+
 require('./less/index.less');
 
 //加载到了bootstrap的样式文件

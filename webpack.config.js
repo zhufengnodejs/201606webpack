@@ -23,13 +23,17 @@ function rewriteUrl(replacePath){
 
 module.exports = {
     //指定入口文件
-    entry:path.resolve('src/index.js'),
+    entry:{
+        //多入口文件
+        'a':path.resolve('src/a.js'),
+        'b':path.resolve('src/b.js')
+    },
     //指定输出文件
     output:{
         //指定输出文件的路径目录
         path:path.resolve('build'),
         //指定输出文件的文件名
-        filename:'bundle.js'
+        filename:'[name].[hash:5].js'
     },
     devServer:{
       inline:true,
@@ -104,9 +108,38 @@ module.exports = {
     plugins:[
         definePlugin,//定义全局变量插件
         new ExtractTextWebpackPlugin('bundle.css'),
+       /* new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),*/
+        new webpack.optimize.CommonsChunkPlugin('common.js'),
+
         new htmlWebpackPlugin({
             title:'珠峰Webpack',
-            template:'./src/index.html'
+            template:'./src/index.html',
+            filename:'./a.html',
+            chunks:['a','common.js']//包含产出的资源
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.MinChunkSizePlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        // 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
+        new webpack.optimize.DedupePlugin(),
+        // 按引用频度来排序 ID，以便达到减少文件大小的效果
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin({
+            minSizeReduce: 1.5,
+            moveToParents: true
+        }),
+        new htmlWebpackPlugin({
+            title:'珠峰Webpack',
+            template:'./src/index.html',
+            filename:'./b.html',
+            chunks:['b','common.js']
         }),
         new OpenBrowserWebpackPlugin({
             url:'http://localhost:8080'
