@@ -59,6 +59,12 @@ module.exports = {
                 include:path.resolve('src'),
                 //不解析node_modules文件下面的文件
                 exclude:/node_modules/
+            },
+            {
+                //加载以less后缀结尾的文件
+                test:/\.less$/,
+                //执行三个加载器
+                loader:'style!css!less'
             }
         ],
         //不再扫描此路径下面的文件里的依赖模块

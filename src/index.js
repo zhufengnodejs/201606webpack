@@ -1,6 +1,7 @@
 import {name} from './component'
 console.log(name);
 import $ from 'jquery';
+require('./less/index.less');
 $('#app').html(name);
 
 
