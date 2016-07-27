@@ -7,6 +7,7 @@ var OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 var definePlugin = new webpack.DefinePlugin({
     ___IS_DEV___:(process.env.BUILD_ENV?process.env.BUILD_ENV.trim():'') == 'dev'
 })
+var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 //指定替换规则
 function rewriteUrl(replacePath){
   return function(req,options){
@@ -72,11 +73,13 @@ module.exports = {
                 //加载以less后缀结尾的文件
                 test:/\.less$/,
                 //执行三个加载器
-                loader:'style!css!less'
+                loader:ExtractTextWebpackPlugin.extract('style','css!less')
+                //loader:'style!css!less'
             },
             {
                 test:/\.css$/,//加载css的
-                loader:'style!css'
+                loader:ExtractTextWebpackPlugin.extract('style','css')
+                //loader:'style!css'
             },
             {
                 //加载图标字体
@@ -100,6 +103,7 @@ module.exports = {
     },
     plugins:[
         definePlugin,//定义全局变量插件
+        new ExtractTextWebpackPlugin('bundle.css'),
         new htmlWebpackPlugin({
             title:'珠峰Webpack',
             template:'./src/index.html'
