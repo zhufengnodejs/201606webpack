@@ -1,8 +1,9 @@
+//import $ from 'jquery';
+var $ = require('jquery');
 import {name} from './component'
 console.log(name);
-import $ from 'jquery';
 require('./less/index.less');
-$('#app').html(name);
+
 //加载到了bootstrap的样式文件
 require('bootstrap/dist/css/bootstrap.css');
 //创建一个图片
@@ -13,6 +14,16 @@ img.src= require('./imgs/baidu.png');
 img.className = 'img-circle';
 //把当前的图片插入到当前的文档里
 document.body.appendChild(img);
+//在代码中能够判断出来当前处于哪个环境 开发环境 还是生产环境
+// set ENV=development         echo %ENV%
+// export ENV=delopment        echo $ENV
+var a=1, b=2,c=3;
+var result = a+b;
+if(window.___IS_DEV___)
+  console.log('res1',result);
+result = result +c;
+if(window.___IS_DEV___)
+  console.log('res2',result);
 
 
 

@@ -1,2 +1,2 @@
-var str = '/api/users';
-console.log(str.replace(/\/api\/(.+)/,'$1\.json'));
+process.env.xx = 'abc';
+console.log(process.env.xx);

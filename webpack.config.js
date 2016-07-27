@@ -1,7 +1,12 @@
 var path = require('path');
+var webpack = require('webpack');
 var jqueryPath = path.resolve('node_modules/jquery/dist/jquery.js');
 var htmlWebpackPlugin = require('html-webpack-plugin');
 var OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
+//定义全局变量插件 window.___DEV___ =
+var definePlugin = new webpack.DefinePlugin({
+    ___IS_DEV___:(process.env.BUILD_ENV?process.env.BUILD_ENV.trim():'') == 'dev'
+})
 //指定替换规则
 function rewriteUrl(replacePath){
   return function(req,options){
@@ -82,12 +87,19 @@ module.exports = {
                 //图片
                 test:/\.(png|jpg|bmp|gif)$/,
                 loader:'url?limit=8192'
+            },
+            //1. 有些插件需要依赖全局的jquery对象 jQuery $
+            //2. jquery在所有的模块都要用到
+            {
+                test:/jquery.js/,
+                loader:'expose?$'
             }
         ],
         //不再扫描此路径下面的文件里的依赖模块
-        noParse: [jqueryPath]
+        //noParse: [jqueryPath]
     },
     plugins:[
+        definePlugin,//定义全局变量插件
         new htmlWebpackPlugin({
             title:'珠峰Webpack',
             template:'./src/index.html'
