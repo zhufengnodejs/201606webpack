@@ -1,4 +1,5 @@
 var path = require('path');
+var jqueryPath = path.resolve('node_modules/jquery/dist/jquery.js');
 //指定替换规则
 function rewriteUrl(replacePath){
   return function(req,options){
@@ -30,12 +31,20 @@ module.exports = {
           {
               path:/^\/api\/(.+)/,//我要替换的路径
               //目标服务，把此请求交给哪个服务器来处理
-              target:'http://localhost:8080',
+              target:'http://localhost:9090',
               // 指定路径 的替换规则
               rewrite:rewriteUrl('/$1\.json'),
               changeorigin:true
           }
       ]
+    },
+    //指定如何解析加载模块
+    resolve:{
+      //指定扩展名
+      extensions:['','.js','.css','.json'],
+      alias:{
+          'jquery':jqueryPath
+      }
     },
     //指定模块的加载方式
     module:{
@@ -51,6 +60,8 @@ module.exports = {
                 //不解析node_modules文件下面的文件
                 exclude:/node_modules/
             }
-        ]
+        ],
+        //不再扫描此路径下面的文件里的依赖模块
+        noParse: [jqueryPath]
     }
 }

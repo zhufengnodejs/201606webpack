@@ -1,5 +1,14 @@
-import {name} from './component.js'
+import {name} from './component'
 console.log(name);
+import $ from 'jquery';
+$('#app').html(name);
+
+
+
+
+
+
+/*
 var xhr = new XMLHttpRequest;
 xhr.open('GET','/api/users',true);
 xhr.onreadystatechange = function(){
@@ -7,4 +16,4 @@ xhr.onreadystatechange = function(){
         document.write(xhr.responseText);
     }
 }
-xhr.send();
+xhr.send();*/
