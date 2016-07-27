@@ -1,2 +1,2 @@
-export var name =  'hello4';
+export var name =  'hello9';
 import {age} from './component2'

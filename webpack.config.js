@@ -1,5 +1,7 @@
 var path = require('path');
 var jqueryPath = path.resolve('node_modules/jquery/dist/jquery.js');
+var htmlWebpackPlugin = require('html-webpack-plugin');
+var OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 //指定替换规则
 function rewriteUrl(replacePath){
   return function(req,options){
@@ -24,6 +26,7 @@ module.exports = {
         filename:'bundle.js'
     },
     devServer:{
+      inline:true,
       stats:{colors:true},//是否显示颜色
       port:8080,//端口号
       contentBase:'build',//静态文件根目录
@@ -83,5 +86,14 @@ module.exports = {
         ],
         //不再扫描此路径下面的文件里的依赖模块
         noParse: [jqueryPath]
-    }
+    },
+    plugins:[
+        new htmlWebpackPlugin({
+            title:'珠峰Webpack',
+            template:'./src/index.html'
+        }),
+        new OpenBrowserWebpackPlugin({
+            url:'http://localhost:8080'
+        })
+    ]
 }
