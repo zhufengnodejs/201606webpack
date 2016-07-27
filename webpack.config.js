@@ -1,4 +1,17 @@
 var path = require('path');
+//指定替换规则
+function rewriteUrl(replacePath){
+  return function(req,options){
+      //取得问号的索引
+      var queryIndex = req.url.indexOf('?');
+      //取得查询字符串
+      var query =  queryIndex>=0?req.url.slice(queryIndex):'';
+      //进行路径的替换
+      req.url = req.path.replace(options.path,replacePath)+query;
+      console.log(req.url);
+  }
+}
+
 module.exports = {
     //指定入口文件
     entry:path.resolve('src/index.js'),
@@ -12,7 +25,17 @@ module.exports = {
     devServer:{
       stats:{colors:true},//是否显示颜色
       port:8080,//端口号
-      contentBase:'build'//静态文件根目录
+      contentBase:'build',//静态文件根目录
+      proxy:[
+          {
+              path:/^\/api\/(.+)/,//我要替换的路径
+              //目标服务，把此请求交给哪个服务器来处理
+              target:'http://localhost:8080',
+              // 指定路径 的替换规则
+              rewrite:rewriteUrl('/$1\.json'),
+              changeorigin:true
+          }
+      ]
     },
     //指定模块的加载方式
     module:{
