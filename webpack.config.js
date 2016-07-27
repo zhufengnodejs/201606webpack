@@ -9,6 +9,11 @@ module.exports = {
         //指定输出文件的文件名
         filename:'bundle.js'
     },
+    devServer:{
+      stats:{colors:true},//是否显示颜色
+      port:8080,//端口号
+      contentBase:'build'//静态文件根目录
+    },
     //指定模块的加载方式
     module:{
         //模块加载器数组
