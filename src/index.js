@@ -8,7 +8,7 @@ require('bootstrap/dist/css/bootstrap.css');
 //创建一个图片
 var img = document.createElement('img');
 //指定源文件
-img.src= require('./imgs/sunflower.jpg');
+img.src= require('./imgs/baidu.png');
 //指定使用的样式
 img.className = 'img-circle';
 //把当前的图片插入到当前的文档里
