@@ -65,6 +65,20 @@ module.exports = {
                 test:/\.less$/,
                 //执行三个加载器
                 loader:'style!css!less'
+            },
+            {
+                test:/\.css$/,//加载css的
+                loader:'style!css'
+            },
+            {
+                //加载图标字体
+                test:/\.(eot|svg|ttf|woff|woff2)$/,
+                loader:'url?limit=8192'
+            },
+            {
+                //图片
+                test:/\.(png|jpg|bmp|gif)$/,
+                loader:'url?limit=8192'
             }
         ],
         //不再扫描此路径下面的文件里的依赖模块
