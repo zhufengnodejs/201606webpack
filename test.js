@@ -1,2 +1,2 @@
-process.env.xx = 'abc';
-console.log(process.env.xx);
+var css = require("css!./file.css");
+console.log(css);

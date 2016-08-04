@@ -141,6 +141,12 @@ module.exports = {
             filename:'./b.html',
             chunks:['b','common.js']
         }),
+        new htmlWebpackPlugin({
+            title:'珠峰Webpack',
+            template:'./src/index.html',
+            filename:'./b.html',
+            chunks:['b','common.js']
+        }),
         new OpenBrowserWebpackPlugin({
             url:'http://localhost:8080'
         })
