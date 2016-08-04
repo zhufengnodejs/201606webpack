@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 //根据模板的HTML文件向目标文件夹自动生成一个目标html文件
 //会把产出(打包后)的JS文件插入到html当中去
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -6,7 +7,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 module.exports = {
     //入口文件
-    entry: path.join(__dirname, 'react/index.js'),
+    entry: path.join(__dirname, './react/index.js'),
     //输出文件
     output: {
         path: './build', //文件夹的名称
@@ -17,13 +18,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel',
-                include: './react',
+                loaders:['react-hot','babel?presets[]=es2015&presets[]=react'],
+                include: path.join(__dirname,'react'),
                 exclude: /node_modules/
             }
         ]
     },
     devServer:{//配置webpack-dev-server
+        hot:true,
         inline:true,//实时刷新，当源代码修改后实时刷新页面
         port:8080,//端口号
         contentBase:'build'//静态文件根目录
@@ -32,6 +34,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template:'./react/index.html'
         }),
+        new webpack.HotModuleReplacementPlugin(),
         new openBrowserWebpackPlugin({url:'http://localhost:8080'})
     ]
 }
