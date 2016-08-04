@@ -11,7 +11,7 @@ export default class CommentBox extends React.Component{
                 </div>
                 <div className="row">
                     <div className="col-xs-12">
-                        <CommentList></CommentList>
+                        <CommentList comments={this.props.comments}></CommentList>
                     </div>
                 </div>
                 <div className="row">
