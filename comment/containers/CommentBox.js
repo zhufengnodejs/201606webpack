@@ -7,7 +7,12 @@ export default class CommentBox extends React.Component{
         //如果是在constructor里修改状态，不用setState,应该直接赋值
         this.state = {comments:props.comments};
     }
-
+    //删除留言
+    del(id){
+      console.log('id',id);
+      var comments = this.props.removeComment(id);
+      this.setState({comments:comments});
+    }
     submitForm(comment){
         //把这个新的comment对象保存在localStorage里了
         var comments = this.props.addComment(comment);
@@ -24,7 +29,7 @@ export default class CommentBox extends React.Component{
                 </div>
                 <div className="row">
                     <div className="col-xs-12">
-                        <CommentList comments={this.state.comments}></CommentList>
+                        <CommentList del={this.del.bind(this)} comments={this.state.comments}></CommentList>
                     </div>
                 </div>
                 <div className="row">

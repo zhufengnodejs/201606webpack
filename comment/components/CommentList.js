@@ -8,9 +8,8 @@ export default class CommentList extends React.Component {
                     <ul className="list-group">
                         {
                             this.props.comments.map(comment=>
-                                <Comment key={comment.id}>
-                                    {comment.username}:{comment.content}:{comment.time}
-                                </Comment>)
+                                <Comment del={this.props.del} key={comment.id} comment={comment}/>
+                            )
                         }
                     </ul>
                 </div>

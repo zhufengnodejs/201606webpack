@@ -8,6 +8,13 @@ module.exports = {
        var result = localStorage.getItem(COMMENTS);
        return result?JSON.parse(result):[];
    },
+    //移除留言
+    remove(id){
+        var comments = this.list();
+        comments = comments.filter(comment => comment.id != id);
+        localStorage.setItem(COMMENTS,JSON.stringify(comments));
+        return comments;
+    },
     //{username:'张三',content:'今天天气真好',time:Date} 增加新的留言的功能
    add(comment){
        var comments = this.list();
@@ -16,6 +23,6 @@ module.exports = {
        comment.time = new Date();
        comments.push(comment);
        localStorage.setItem(COMMENTS,JSON.stringify(comments));
-       return this.list();
+       return comments;
    }
 }

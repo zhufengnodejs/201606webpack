@@ -5,6 +5,8 @@ export default class CommentForm extends React.Component{
         var username = this.refs.username.value;// 取得用户名
         var content = this.refs.content.value;//取得留言
         this.props.submitForm({username,content});//把此对象交由父组件方法来处理
+        this.refs.username.value = '';
+        this.refs.content.value = '';
     }
 
     render(){
