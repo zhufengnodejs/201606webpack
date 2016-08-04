@@ -9,6 +9,6 @@ var utils = require('./utils');
 
 //把留言板组件渲染到页面的ID为app的div内部
 ReactDOM.render(
-    <CommentBox comments={utils.list()} />,
+    <CommentBox comments={utils.list()} addComment={utils.add.bind(utils)} />,
     document.querySelector('#app')
 );

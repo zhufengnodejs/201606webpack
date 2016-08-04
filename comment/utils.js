@@ -13,7 +13,9 @@ module.exports = {
        var comments = this.list();
        //自动赋于ID号
        comment.id = comments.length>0?comments[comments.length-1].id+1:1;
+       comment.time = new Date();
        comments.push(comment);
        localStorage.setItem(COMMENTS,JSON.stringify(comments));
+       return this.list();
    }
 }
