@@ -24,6 +24,7 @@
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-hot-loader": "^1.3.0",
+    "react-router": "^2.6.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
@@ -55,7 +56,9 @@
     "build_react": "webpack --config webpack.config.react.js",
     "start-react": "webpack-dev-server --config webpack.config.react.js",
     "build_comment": "webpack --config webpack.config.comment.js",
-    "start-comment": "webpack-dev-server --config webpack.config.comment.js"
+    "start-comment": "webpack-dev-server --config webpack.config.comment.js",
+    "build_route": "webpack --config webpack.config.route.js",
+    "start-route": "webpack-dev-server --config webpack.config.route.js"
   },
   "keywords": [],
   "author": "",
