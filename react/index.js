@@ -1,3 +1,5 @@
-console.log('aaa');
-console.log('bbb');
-document.write('hello2');
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+
+
