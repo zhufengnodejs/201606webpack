@@ -21,6 +21,10 @@ module.exports = {
                 loaders:['react-hot','babel?presets[]=es2015&presets[]=react'],
                 include: path.join(__dirname,'react'),
                 exclude: /node_modules/
+            },
+            {
+                test:/\.css$/,
+                loaders:['style-loader','css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]']
             }
         ]
     },
